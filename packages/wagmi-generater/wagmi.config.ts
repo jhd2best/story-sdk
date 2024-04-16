@@ -4,6 +4,7 @@ import {sdk} from './sdk'
 import type {Evaluate} from "@wagmi/cli/src/types";
 import type {ContractConfig} from "@wagmi/cli/src/config";
 import {resolveProxyContracts} from "./resolveProxyContracts";
+import {sepolia} from "viem/chains";
 
 const storyTestnetId = 1513
 
@@ -46,33 +47,9 @@ export default defineConfig(async () => {
             }
         },
         {
-            name: "LicensingModule", address: {
-                // [sepolia.id]: "0x950d766A1a0afDc33c3e653C861A8765cb42DbdC",
-                [storyTestnetId]: "0xEeDDE5529122b621105798860F235c28FD3aBA40",
-            }
-        },
-        {
-            name: "PILicenseTemplate", address: {
-                // [sepolia.id]: "",
-                [storyTestnetId]: "0xd0Be223ae9719bBD93447ecf5289319CCf8cA227",
-            }
-        },
-        {
-            name: "ModuleRegistry", address: {
-                // [sepolia.id]: "0x5Aac3177F496F503Ac724A0D0A697f6ba9dA2C27",
-                [storyTestnetId]: "0xf2965E3B6251905Dd1E8671077760D07b0408cf2",
-            }
-        },
-        {
-            name: "RoyaltyModule", address: {
-                // [sepolia.id]: "0xA6bEf9CC650A16939566c1da5d5088f3F028a865",
-                [storyTestnetId]: "0x551AD8CD7893003cE00500aC2aCF1E327763D9f6",
-            }
-        },
-        {
-            name: "RoyaltyPolicyLAP", address: {
-                // [sepolia.id]: "0x16eF58e959522727588921A92e9084d36E5d3855",
-                [storyTestnetId]: "0x2EcdB5bD12a037dCb9De0Ab7957f35FEeF758eA6",
+            name: "StoryProtocolGateway", address: {
+                // [sepolia.id]: "0xf82EEe73c2c81D14DF9bC29DC154dD3c079d80a0",
+                // [storyTestnetId]: "0x2EcdB5bD12a037dCb9De0Ab7957f35FEeF758eA6",
             }
         },
     ]
@@ -148,6 +125,10 @@ export default defineConfig(async () => {
                         "onRoyaltyPayment",
                         "getRoyaltyData",
                     ],
+                    "StoryProtocolGateway": [
+                        "mintAndRegisterIpWithSig",
+                        "createIpCollection",
+                    ]
                 }
             }),
         ],

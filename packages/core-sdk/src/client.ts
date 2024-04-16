@@ -16,6 +16,7 @@ import { chainStringToViemChain } from "./utils/utils";
 import { StoryAPIClient } from "./clients/storyAPI";
 import { RoyaltyClient } from "./resources/royalty";
 import { SimpleWalletClient } from "./abi/generated";
+import { SPGClient } from "./resources/spg";
 
 if (typeof process !== "undefined") {
   dotenv.config();
@@ -34,6 +35,7 @@ export class StoryClient {
   private _dispute: DisputeClient | null = null;
   private _ipAccount: IPAccountClient | null = null;
   private _royalty: RoyaltyClient | null = null;
+  private _spg: SPGClient | null = null;
   /**
    * @param config - the configuration for the SDK client
    */
@@ -186,5 +188,19 @@ export class StoryClient {
     }
 
     return this._royalty;
+  }
+
+  /**
+   * Getter for the spg client. The client is lazily created when
+   * this method is called.
+   *
+   * @returns the SPGClient instance
+   */
+  public get spg(): SPGClient {
+    if (this._spg === null) {
+      this._spg = new SPGClient(this.rpcClient, this.wallet);
+    }
+
+    return this._spg;
   }
 }
